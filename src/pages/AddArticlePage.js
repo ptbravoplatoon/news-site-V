@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addArticle } from '../api/ArticlesAPI';
 
-class AddArticlePage extends Component {
-	state = {
-		hasArticleBeenSubmitted: false,
-		submitError: null
-	};
+function AddArticlePage() {
+	const [ hasArticleBeenSubmitted, setHasArticleBeenSubmitted ] = useState(false);
+	const [ submitError, setSubmitError ] = useState(null);
 
-	handleFormSubmit = (e) => {
+	const handleFormSubmit = (e) => {
 		e.preventDefault();
 		const newArticle = {};
 		newArticle.title = e.target.elements[0].value;
@@ -16,24 +14,20 @@ class AddArticlePage extends Component {
 		newArticle.abstract = e.target.elements[2].value;
 		addArticle(newArticle).then((json) => {
 			if (json.error) {
-				this.setState({
-					submitError: json.error.message
-				});
+				setSubmitError(json.error.message);
 			} else {
-				this.setState({
-					hasArticleBeenSubmitted: true
-				});
+				setHasArticleBeenSubmitted(true);
 			}
 		});
 	};
 
-	submittedMessage = () => {
+	const submittedMessage = () => {
 		return <h2>Your article has been successfully submitted</h2>;
 	};
 
-	addArticleForm = () => {
+	const addArticleForm = () => {
 		return (
-			<Form onSubmit={this.handleFormSubmit}>
+			<Form onSubmit={handleFormSubmit}>
 				<FormGroup>
 					<Label for="titleInput">Title</Label>
 					<Input type="text" name="title" id="titleInput" />
@@ -51,12 +45,10 @@ class AddArticlePage extends Component {
 		);
 	};
 
-	render() {
-		if (this.state.hasArticleBeenSubmitted) {
-			return this.submittedMessage();
-		} else {
-			return this.state.submitError ? this.state.submitError : this.addArticleForm();
-		}
+	if (hasArticleBeenSubmitted) {
+		return submittedMessage();
+	} else {
+		return submitError ? submitError : addArticleForm();
 	}
 }
 
