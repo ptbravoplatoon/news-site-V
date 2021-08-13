@@ -25,9 +25,28 @@ const searchArticles = async (textToSearchFor) => {
   return data;
 }
 
+
+const addArticle = async (articleObject) => {
+  try {
+    let response = await fetch(BASE_URL, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(articleObject)
+    })
+    let data = response.json();
+    return data
+  }
+  catch (err) {
+    console.error(err)
+  }
+}
+
 export {
   fetchArticleByID,
   fetchArticles,
   fetchArticlesBySection,
   searchArticles,
+  addArticle
 };
