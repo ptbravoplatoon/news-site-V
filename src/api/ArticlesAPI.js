@@ -25,9 +25,21 @@ const searchArticles = async (textToSearchFor) => {
   return data;
 }
 
+const addArticle = async (articleData) => {
+  const postObj = {
+    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    body: JSON.stringify(articleData)
+  }
+  const response = await fetch('http://localhost:3001/api/articles', postObj)
+  const fullResponse = await response.json()
+  return fullResponse
+}
+
 export {
   fetchArticleByID,
   fetchArticles,
   fetchArticlesBySection,
   searchArticles,
+  addArticle,
 };
