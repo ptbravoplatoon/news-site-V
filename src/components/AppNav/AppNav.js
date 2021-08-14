@@ -12,6 +12,8 @@ class AppNav extends Component {
             { navItem.label }
           </Link>
         )}
+        <Link to={"/add-article"}>Add an Article</Link>
+        <Link to={"/login"}>Login</Link>
       </Navbar>
     )
   }
