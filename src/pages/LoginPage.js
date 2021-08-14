@@ -7,12 +7,16 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const loginObject = {};
-    [...e.target]
-      .filter((item) => item.name)
-      .forEach((item) => {
-        loginObject[item.name] = item.value;
-      });
+    // const loginObject = {};
+    // [...e.target]
+    //   .filter((item) => item.name)
+    //   .forEach((item) => {
+    //     loginObject[item.name] = item.value;
+    //   });
+    const loginObject = {
+      email: email,
+      password: password,
+    };
     console.log(loginObject);
   };
 

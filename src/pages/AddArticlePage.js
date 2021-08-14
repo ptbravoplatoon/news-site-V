@@ -37,12 +37,17 @@ const AddArticlePage = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const articleObject = {};
-    [...e.target]
-      .filter((item) => item.name)
-      .forEach((item) => {
-        articleObject[item.name] = item.value;
-      });
+    // const articleObject = {};
+    // [...e.target]
+    //   .filter((item) => item.name)
+    //   .forEach((item) => {
+    //     articleObject[item.name] = item.value;
+    //   });
+    const articleObject = {
+      title: title,
+      byline: byline,
+      abstract: abstract,
+    };
     await addArticle(articleObject).then((newArticleObject) => {
       if (newArticleObject) {
         setIsSubmitSuccess(true);
