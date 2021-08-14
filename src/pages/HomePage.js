@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import ArticleList from '../components/ArticleList/ArticleList.js'
-import { fetchArticles, searchArticles } from '../api/ArticlesAPI';
-import { InputGroup, Input } from 'reactstrap';
+import React, { Component } from "react";
+import ArticleList from "../components/ArticleList/ArticleList.js";
+import { fetchArticles, searchArticles } from "../api/ArticlesAPI";
+import { InputGroup, Input } from "reactstrap";
 
 class HomePage extends Component {
   state = {
-    articles: []
+    articles: [],
   };
 
   async componentDidMount() {
@@ -13,7 +13,7 @@ class HomePage extends Component {
       const articlesJson = await fetchArticles();
       this.setState({ articles: articlesJson });
     } catch (e) {
-      console.error('error fetching articles: ', e);
+      console.error("error fetching articles: ", e);
     }
   }
 
@@ -28,7 +28,7 @@ class HomePage extends Component {
       }
       this.setState({ articles: articlesJson });
     } catch (e) {
-      console.error('error searching articles: ', e);
+      console.error("error searching articles: ", e);
     }
   }
 
@@ -36,7 +36,11 @@ class HomePage extends Component {
     return (
       <div>
         <InputGroup>
-          <Input onChange={(e) => this.handleSearch(e)} type="text" placeholder="Search" />
+          <Input
+            onChange={(e) => this.handleSearch(e)}
+            type="text"
+            placeholder="Search"
+          />
         </InputGroup>
         <ArticleList articles={this.state.articles} />
       </div>
@@ -45,7 +49,6 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
 
 // Functional solution:
 // function HomePage(props) {
